@@ -1,0 +1,6 @@
+import Control.Monad
+
+main = do
+  forever putStrLn "What is your name ? "
+  name <- getLine
+  putStrLn ("Hello " ++ name ++ " !")
