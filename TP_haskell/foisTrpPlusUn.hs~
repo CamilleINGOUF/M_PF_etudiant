@@ -1,0 +1,5 @@
+foisTroisPlusUn::Num a => a -> a
+foisTroisPlusUn = (\x -> 3 *x) (\x -> x + 1)
+
+main = do
+  print $foisTroisPlusUn 2

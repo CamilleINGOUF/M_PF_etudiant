@@ -34,10 +34,13 @@ mul42 = (42*)
 null' :: Int -> Bool
 null' = (==) 0
  
-        -- (!!) :: [a] -> Int -> a 
+-- (!!) :: [a] -> Int -> a 
 
 getElem2' :: [a] -> a
 getElem2' = (!!1)
+
+getElem2''::[a] -> a
+getElem2'' = head . tail
 
 --Composition de fonctions
 
@@ -50,5 +53,4 @@ main = do
   --print $mul42 2
   --print $mul42 3
   --print $null' 4
-  --print $getElem2' "bouboubou"
-  print $doublePlusUn 2
+  print $getElem2'' "bouboubou"
