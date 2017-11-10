@@ -16,42 +16,27 @@ typedef std::vector<sample_t> distribution_t;
 typedef std::function<double()> generator_t;
 typedef std::vector<double> data_t;
 
-// TODO generate
-/*sample_t generateSample(generator_t & rng)
+sample_t generateSample(generator_t & rng)
 {
+    // TODO generate
     sample_t sample;
     for (double & x : sample)
         x = rng();
     return sample;
-}*/
-
-sample_t generateSample(generator_t & rng)
-{
-  sample_t sample;
-  std::generate_n(sample.begin(), DIMENSION, [&rng](){return rng();});
-  return sample;
 }
-// TODO inner_product
-/*
+
 double radius2(const sample_t & s)
 {
-   
+    // TODO inner_product
     double somme = 0.0;
     for (double x : s)
         somme += x*x;
     return somme;
-}*/
-
-double radius2(const sample_t & s)
-{
-  auto produit =  [](double a, double b){return a*b;};
-  double somme = std::inner_product(s.begin(), s.end(),s.begin(),0.0, std::plus<double>(),produit);
-  return somme;
 }
 
-// TODO inner_product
-/*double distance(const sample_t & s1, const sample_t & s2) 
+double distance(const sample_t & s1, const sample_t & s2) 
 {
+    // TODO inner_product
     double somme = 0.0;
     for (unsigned k=0; k<s1.size(); k++)
     {
@@ -59,28 +44,15 @@ double radius2(const sample_t & s)
         somme += delta*delta;
     }
     return sqrt(somme);
-}*/
-
-double distance(const sample_t & s1, const sample_t & s2) 
-{
-  auto produit =  [](double a, double b){return (a-b)*(a-b);};
-  double somme = std::inner_product(s1.begin(), s1.end(), s2.begin(), 0.0, std::plus<double>(),produit);
-  return sqrt(somme);
 }
-// TODO any_of
-/*
+
 bool isTooClose(const distribution_t &d, const sample_t &s, double minDistance) 
 {
+    // TODO any_of
     for (const sample_t & s2 : d)
         if (distance(s, s2) < minDistance)
             return true;
     return false;
-}*/
-
-bool isTooClose(const distribution_t &d, const sample_t &s, double minDistance) 
-{
-  auto distanceLambda = [s,minDistance](sample_t s2){return distance(s, s2) < minDistance;};
-  return std::any_of(d.begin(), d.end(), distanceLambda);
 }
 
 distribution_t generateDistribution(generator_t & rng, 
