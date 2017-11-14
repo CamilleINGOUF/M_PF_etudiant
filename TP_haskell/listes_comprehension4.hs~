@@ -1,0 +1,11 @@
+concat1::[[a]] -> [a]
+concat1 [] = []
+concat1 (x:xs) = x ++ (concat1 xs)
+
+--marche pas
+concat2::[[a]] -> [a]
+concat2 l = [x | x <- l]
+
+main = do
+  print $concat1 [[2,5,6,7,8],[5,5,6,4,5,8]]
+  print $concat2 [[2,5,6,7,8],[5,5,6,4,5,8]]
