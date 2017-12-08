@@ -4,14 +4,15 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <sstream>
 
-struct Element {
-    int val;
-    Element *nxt;
-};
+template<typename T>
 
 class Liste {
-private :
+  struct Element {
+    T val;
+    Element *nxt;
+  };
   Element* head;
 public :
   Liste() : head(nullptr)
@@ -21,30 +22,25 @@ public :
   
   std::string showListe() const {
     Element* copy = head;
-    std::string str;
+    std::ostringstream str;
     while(copy != NULL) {
-      str += copy->val + " ";
+      str << copy->val << " ";
       copy = copy->nxt;
     }
-    str += "\n";
-    return str;
+    str << "\n";
+    return str.str();
   }
   
-  void convertListe(std::vector<int> vec)
+  void convertListe(std::vector<T> & vec)
   {
-    Element* list = NULL;
-    std::cout << vec.size() << std::endl;
-    for(unsigned i = vec.size() - 1; i >= 0; i--) {
-      Element* elem = new Element;
-      elem->val = vec[i];
-      elem->nxt = list;
+    for (auto it = vec.cbegin(); it != vec.cend(); ++it) {
+      head = new Element{*it,head};
     }
-    head = list;
   }
 };
 
 int main() {
-  Liste li;
+  Liste<int> li;
   std::vector<int> vec{5,2,6,3,6,5,6,4,8,6};
   li.convertListe(vec);
   std::cout << li.showListe();
